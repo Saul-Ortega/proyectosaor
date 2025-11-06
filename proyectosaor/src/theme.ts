@@ -1,21 +1,19 @@
-import { createTheme } from '@mui/material/styles';
+import { ThemeOptions } from '@mui/material/styles';
 
-const theme = createTheme({
+export const themeOptions: ThemeOptions = {
   palette: {
-    mode: 'dark',
+    mode: 'light',
     primary: {
-      main: '#7e22fe',
+      main: '#0d36b3',
     },
     secondary: {
-      main: '#2d8e0e',
+      main: '#b38a0d',
     },
     background: {
-      default: '#121212',
+      default: '#FFFF',
     },
   },
   typography: {
     fontFamily: 'Momo Trust Display',
   },
-});
-
-export default theme
+};
