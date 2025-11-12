@@ -6,12 +6,15 @@ import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../store/authSlice';
 
 const Login = () => {
     const [ user, setUser ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ alert, setAlert ] = useState({show: false, isValidated: false})
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     
     const handleUserChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
         setUser(event.target.value);
@@ -30,9 +33,14 @@ const Login = () => {
         const isValidated: boolean = user === dbUser && password === dbPasswd;
 
         setAlert({show: true, isValidated: isValidated});
-        console.log({user, password});
+        //console.log({user, password});
 
         if ( isValidated ) {
+            dispatch(authActions.login({
+                name: user,
+                role: 'admin'
+            }))
+
             navigate('/home');
         }
         
