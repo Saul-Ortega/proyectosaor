@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 
 const Home = () => {
-    const userData = useSelector( (state: RootState) => state.authenticator );
+    const userData = useSelector( (state: RootState) => state.authentication );
     console.log(userData);
 
     const navigate = useNavigate();
