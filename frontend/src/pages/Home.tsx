@@ -14,8 +14,8 @@ const Home = () => {
     const dispatch = useDispatch();
 
     const handleGetOut = () => {
-        dispatch(authActions.login({}))
-        navigate('/')
+        dispatch(authActions.logout());
+        navigate('/');
     }
 
     return (
