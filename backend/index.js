@@ -8,8 +8,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//poner lo del login
-
 app.get('/', ( req, res ) => {
     res.json({ ok: true, message: 'API Example Connected' })
 })

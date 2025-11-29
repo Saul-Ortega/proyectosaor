@@ -35,25 +35,7 @@ function MenuAppBar() {
 
   const listNavigation = ['/home', '/reports', '', "/"]
   const listIcons = [<HomeIcon />, <BookIcon />, <HelpIcon />, <ExitToAppIcon />]
-
-  const DrawerList = (
-      <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
-          <List>
-              {['Inicio', 'Informes', 'Ayuda', 'Salir'].map((text, index) => (
-            <Link to={listNavigation[index]} key={text} style={{textDecoration:'none', color:'black'}}>
-                <ListItem key={text} disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      {listIcons[index]}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItemButton>
-                </ListItem>
-            </Link>
-              ))}
-          </List>
-      </Box>
-  )
+  const listText = ['Inicio', 'Informes', 'Ayuda', 'Salir'];
 
   const isLoggedin = userData.isAutenticated
   
@@ -79,7 +61,25 @@ function MenuAppBar() {
 
           </IconButton>
           <Drawer open={open} onClose={toggleDrawer(false)}>
-            {DrawerList}
+            <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+              <List>
+                  {listText.map((text, index) => (
+                    userData.userRole !== 'admin' && text === 'Informes' ?
+                    <></>
+                  : 
+                    <Link to={listNavigation[index]} key={text} style={{textDecoration:'none', color:'black'}}>
+                        <ListItem key={text} disablePadding>
+                          <ListItemButton>
+                            <ListItemIcon>
+                              {listIcons[index]}
+                            </ListItemIcon>
+                            <ListItemText primary={text} />
+                          </ListItemButton>
+                        </ListItem>
+                    </Link>
+                  ))}
+              </List>
+            </Box>
           </Drawer>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {userData.userName}

@@ -14,20 +14,22 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Paper } from "@mui/material";
 import Divider from '@mui/material/Divider';
 import { useEffect } from 'react'
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
-interface ItemType {
+export interface ItemType {
     id?: number;
     item_name: string;
     brand: string;
     item_type: string;
-    price: number;
+    price: string;
 }
 
 const itemInitialState: ItemType = {
     item_name: '',
     brand: '',
     item_type: '',
-    price: 0
+    price: '0'
 }
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -43,7 +45,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 function Dashboard() {
     const [item, setItem] = useState(itemInitialState)
     const [tableData, setTableData] = useState([])
-
+    const userData = useSelector( (state: RootState) => state.authentication );
     
     const handleSubmit = async ( event: React.FormEvent<HTMLFormElement> ) => {
         event.preventDefault();
@@ -52,7 +54,7 @@ function Dashboard() {
             item_name: item.item_name,
             brand: item.brand,
             item_type: item.item_type,
-            price: item.price.toString()
+            price: parseFloat(item.price).toFixed(2).toString()
         })
 
         const response = await fetch(`http://localhost:3030/addItem?${queryParams}`, {
@@ -130,7 +132,7 @@ function Dashboard() {
                             <TextField label="Tipo" value={item.item_type} onChange={(event) => setItem({...item, item_type: event.target.value})} fullWidth required />
                         </Grid>
                         <Grid size={3}>
-                            <TextField label="Precio" value={item.price} type='number' onChange={(event) => setItem({...item, price: parseFloat(event.target.value)})} fullWidth required />
+                            <TextField label="Precio" value={item.price} type='number' onChange={(event) => setItem({...item, price: event.target.value})} fullWidth required />
                         </Grid>
                     </Grid>
                     <Grid size={12}>
@@ -145,7 +147,12 @@ function Dashboard() {
                 <Table aria-label="DATOS DE LOS ÍTEMS">
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell></StyledTableCell>
+                            {
+                                userData.userRole === 'admin' ?
+                                <StyledTableCell></StyledTableCell>
+                                :
+                                <></>
+                            }
                             <StyledTableCell>Nombre</StyledTableCell>
                             <StyledTableCell>Marca</StyledTableCell>
                             <StyledTableCell>Tipo</StyledTableCell>
@@ -155,11 +162,16 @@ function Dashboard() {
                     <TableBody>
                         {tableData.map(( row: ItemType) => (
                             <TableRow key={row.id}>
-                                <TableCell>
-                                    <Button onClick={() => handleDeleteItem(row)}>
-                                        <DeleteIcon />
-                                    </Button>
-                                </TableCell>
+                                {
+                                    userData.userRole === 'admin' ?
+                                    <TableCell>
+                                        <Button onClick={() => handleDeleteItem(row)}>
+                                            <DeleteIcon />
+                                        </Button>
+                                    </TableCell>
+                                    :
+                                    <></>
+                                }
                                 <TableCell>{row.item_name}</TableCell>
                                 <TableCell>{row.brand}</TableCell>
                                 <TableCell>{row.item_type}</TableCell>

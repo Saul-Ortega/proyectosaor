@@ -77,10 +77,17 @@ const Login = () => {
                 <AccountBoxIcon sx={{ width: '60px', height: '60px' }}/>
                 <Grid container size={12} style={{ display: "flex", flexDirection: "column", justifyItems: "center", alignItems: "center" }}>
                     <Grid size={{md: 6, xs: 8}}>
-                        <TextField label="Usuario" value={user.user_login} onChange={(event) => setUser({...user, user_login: event.target.value})} fullWidth required/>
+                        <TextField label="Usuario" 
+                        value={user.user_login} 
+                        onChange={(event) => setUser({...user, user_login: event.target.value})} 
+                        fullWidth required/>
                     </Grid>
                     <Grid size={{md: 6, xs: 8}}>
-                        <TextField label="Contraseña" value={user.user_password} onChange={(event) => setUser({...user, user_password: event.target.value})} type='password' fullWidth required/>
+                        <TextField label="Contraseña" 
+                        value={user.user_password} 
+                        onChange={(event) => setUser({...user, user_password: event.target.value})} 
+                        type='password' 
+                        fullWidth required/>
                     </Grid>
                     <Grid size={{md: 6, xs: 8}}>
                         <Button variant='contained' fullWidth type='submit'>CONECTAR</Button>
