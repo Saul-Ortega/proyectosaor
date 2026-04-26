@@ -26,11 +26,11 @@ const InformeColeccion = ({ data }: Props) => {
                 options={{
                     exportMenu: [
                         {
-                            label: 'Export CSV',
+                            label: 'Exportar CSV',
                             exportFunc: (col, data) => ExportCsv(col, data, 'Items_CSV'),
                         },
                         {
-                            label: "Export PDF",
+                            label: "Exportar PDF",
                             exportFunc: (col, data) => ExportPdf(col, data, "Items_PDF"),
                         }
                     ],
@@ -40,6 +40,34 @@ const InformeColeccion = ({ data }: Props) => {
                     },
                     columnsButton: true,
                     filtering: true,
+                }}
+                localization={{
+                    pagination: {
+                        labelDisplayedRows: '{from}-{to} de {count}',
+                        labelRowsPerPage: 'Filas por página:',
+                        labelRows: 'filas',
+                        firstAriaLabel: 'Primera Página',
+                        firstTooltip: 'Primera Página',
+                        previousAriaLabel: 'Página Anterior',
+                        previousTooltip: 'Página Anterior',
+                        nextAriaLabel: 'Siguiente Página',
+                        nextTooltip: 'Siguiente Página',
+                        lastAriaLabel: 'Última Página',
+                        lastTooltip: 'Última Página'
+                    },
+                    toolbar: {
+                        showColumnsTitle: 'Mostrar Columnas',
+                        showColumnsAriaLabel: 'Mostrar Columnas',
+                        exportTitle: 'Exportar',
+                        exportAriaLabel: 'Exportar',
+                        searchTooltip: 'Buscar',
+                        searchPlaceholder: 'Buscar',
+                        searchAriaLabel: 'Buscar',
+                        clearSearchAriaLabel: 'Limpiar Búsqueda'
+                    },
+                    body: {
+                        emptyDataSourceMessage: 'Nada que mostrar',
+                    },
                 }}
                 renderSummaryRow={({ column, data }) =>
                     column.field === 'price' ? 

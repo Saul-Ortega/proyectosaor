@@ -3,6 +3,7 @@ import { ItemType } from '../components/Dashboard';
 import MenuAppBar from '../components/MenuAppBar';
 import { Box, Button, Paper } from '@mui/material';
 import InformeColeccion from '../components/InformeColeccion';
+import Tooltip from '@mui/material/Tooltip';
 
 const Reports = () => {
     const [open, setOpen] = useState(false);
@@ -30,9 +31,11 @@ const Reports = () => {
         <>
             <MenuAppBar />
             <Box component={Paper}>
-                <Button variant='contained' style={{width: '300px', height: '40px'}} onClick={handleClick}>
-                    INFORME COLECCIÓN
-                </Button>
+                <Tooltip title="Mostrar informe de colección" placement='bottom' arrow>
+                    <Button variant='contained' style={{width: '300px', height: '40px'}} onClick={handleClick}>
+                        INFORME COLECCIÓN
+                    </Button>
+                </Tooltip>
             </Box>
             {
                 open ?

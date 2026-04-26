@@ -16,6 +16,7 @@ import Divider from '@mui/material/Divider';
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
+import Tooltip from '@mui/material/Tooltip';
 
 export interface ItemType {
     id?: number;
@@ -136,7 +137,9 @@ function Dashboard() {
                         </Grid>
                     </Grid>
                     <Grid size={12}>
-                        <Button variant="outlined" type="submit">+ INSERTAR DATOS</Button>
+                        <Tooltip title="Añadir fila a la tabla" placement='bottom' arrow>
+                            <Button variant="outlined" type="submit">+ INSERTAR DATOS</Button>
+                        </Tooltip>
                     </Grid>
                 </Grid>
             </Box>
@@ -165,9 +168,11 @@ function Dashboard() {
                                 {
                                     userData.userRole === 'admin' ?
                                     <TableCell>
-                                        <Button onClick={() => handleDeleteItem(row)}>
-                                            <DeleteIcon />
-                                        </Button>
+                                        <Tooltip title="Eliminar fila" placement='bottom' arrow>
+                                            <Button onClick={() => handleDeleteItem(row)}>
+                                                <DeleteIcon />
+                                            </Button>
+                                        </Tooltip>
                                     </TableCell>
                                     :
                                     <></>

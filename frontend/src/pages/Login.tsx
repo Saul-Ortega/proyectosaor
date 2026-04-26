@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../store/authSlice';
 import Grid from '@mui/material/Grid';
+import Tooltip from '@mui/material/Tooltip';
 
 interface User {
     id?: number;
@@ -90,7 +91,9 @@ const Login = () => {
                         fullWidth required/>
                     </Grid>
                     <Grid size={{md: 6, xs: 8}}>
-                        <Button variant='contained' fullWidth type='submit'>CONECTAR</Button>
+                        <Tooltip title="Iniciar Sesión" placement='bottom' arrow>
+                            <Button variant='contained' fullWidth type='submit'>CONECTAR</Button>
+                        </Tooltip>
                     </Grid>
                 </Grid>
                 { alert.show ? 
